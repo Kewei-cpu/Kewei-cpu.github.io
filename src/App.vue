@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import RandomGuess from './components/RandomGuess.vue'
-import LetterGuess from './components/LetterGuess.vue'
+import EmojiGuess from './components/EmojiGuess.vue'
 import SearchEmoji from './components/SearchEmoji.vue'
 import AllEmojis from './components/AllEmojis.vue'
 
@@ -15,7 +14,7 @@ type Emoji = {
   order: string
 }
 
-const activeTab = ref('random')
+const activeTab = ref('guess')
 const emojis = ref<Emoji[]>([])
 const loading = ref(true)
 
@@ -51,8 +50,7 @@ const loadEmojis = async () => {
 loadEmojis()
 
 const tabs = [
-  { id: 'random', label: 'Random Guess' },
-  { id: 'letter', label: 'Guess by Letter' },
+  { id: 'guess', label: 'Emoji Guess' },
   { id: 'search', label: 'Search' },
   { id: 'all', label: 'All Emojis' }
 ]
@@ -68,17 +66,12 @@ const tabs = [
       <div class="bg-white rounded-lg shadow-xl p-6">
         <!-- Tab Navigation -->
         <div class="flex flex-wrap gap-2 mb-6 border-b">
-          <button
-            v-for="tab in tabs"
-            :key="tab.id"
-            @click="activeTab = tab.id"
-            :class="[
-              'px-4 py-2 rounded-t-lg font-medium transition-colors',
-              activeTab === tab.id
-                ? 'bg-purple-500 text-white'
-                : 'text-gray-600 hover:bg-gray-100'
-            ]"
-          >
+          <button v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :class="[
+            'px-4 py-2 rounded-t-lg font-medium transition-colors',
+            activeTab === tab.id
+              ? 'bg-purple-500 text-white'
+              : 'text-gray-600 hover:bg-gray-100'
+          ]">
             {{ tab.label }}
           </button>
         </div>
@@ -91,14 +84,9 @@ const tabs = [
 
         <!-- Tab Content -->
         <div v-else>
-          <!-- Random Guess Tab -->
-          <div v-if="activeTab === 'random'" class="space-y-4">
-            <RandomGuess :emojis="emojis" />
-          </div>
-
-          <!-- Letter Guess Tab -->
-          <div v-if="activeTab === 'letter'" class="space-y-4">
-            <LetterGuess :emojis="emojis" />
+          <!-- Emoji Guess Tab -->
+          <div v-if="activeTab === 'guess'" class="space-y-4">
+            <EmojiGuess :emojis="emojis" />
           </div>
 
           <!-- Search Tab -->
