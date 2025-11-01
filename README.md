@@ -32,7 +32,7 @@
 - **构建工具**: Vite
 - **类型检查**: TypeScript
 - **样式**: TailwindCSS
-- **部署**: GitLab Pages
+- **部署**: GitHub Pages
 
 ## 项目设置
 
@@ -78,24 +78,23 @@ npm run test:unit
 npm run lint
 ```
 
-## 部署到 GitLab Pages
+## 部署到 GitHub Pages
 
-本项目已配置 GitLab CI/CD 流水线，可以自动部署到 GitLab Pages：
+本项目已配置 GitHub Actions 工作流，可以自动部署到 GitHub Pages：
 
 ### 自动部署
 
-1. 将代码推送到 GitLab 仓库
-2. 确保在 `main` 分支
-3. GitLab CI/CD 会自动：
+1. 将代码推送到 GitHub 仓库（分支：`main`）
+2. GitHub Actions 会自动：
    - 安装依赖
    - 运行类型检查
    - 构建应用
-   - 部署到 GitLab Pages
+   - 部署到 GitHub Pages
 
 ### 访问应用
 
 部署完成后，访问：
-- `https://git.tsinghua.edu.cn/<username>/emoji-guess`
+- `https://kewei-cpu.github.io/`
 
 ## 项目结构
 
@@ -112,7 +111,9 @@ emoji-guess/
 │   │   └── AllEmojis.vue
 │   ├── App.vue           # 主应用组件
 │   └── main.ts           # 应用入口
-├── .gitlab-ci.yml        # GitLab CI 配置
+├── .github/
+│   └── workflows/
+│       └── deploy.yml    # GitHub Actions 工作流
 └── vite.config.ts        # Vite 配置
 ```
 
