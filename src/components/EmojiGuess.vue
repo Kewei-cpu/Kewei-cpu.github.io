@@ -91,7 +91,7 @@ const filteredEmojis = computed(() => {
   return props.emojis.filter(emoji => {
     const expectedName = emoji.shortname
       .slice(1, -1)
-      .replace(/_/g, ' ')
+      .replace(/[_-]/g, ' ')
     const length = expectedName.replace(/ /g, '').length
 
     const letterMatch = !selectedLetter.value ||
@@ -120,7 +120,7 @@ const inputBoxes = computed(() => {
 
   const expectedName = currentEmoji.value.shortname
     .slice(1, -1)
-    .replace(/_/g, ' ')
+    .replace(/[_-]/g, ' ')
 
   const words = expectedName.split(' ')
   const boxes: { isSpace?: boolean }[] = []
@@ -308,7 +308,7 @@ const giveUp = () => {
 
   const expectedName = currentEmoji.value.shortname
     .slice(1, -1)
-    .replace(/_/g, ' ')
+    .replace(/[_-]/g, ' ')
     .toLowerCase()
 
   const currentRow = guessRows.value[currentRowIndex.value]
@@ -332,7 +332,7 @@ const submitGuess = () => {
   // Extract the expected name
   const expectedName = currentEmoji.value.shortname
     .slice(1, -1)
-    .replace(/_/g, ' ')
+    .replace(/[_-]/g, ' ')
     .toLowerCase()
 
   // Build guess from inputs
@@ -581,7 +581,7 @@ const resetGame = () => {
         </div>
         <div class="text-gray-700">
           <p v-if="!isCorrect">
-            The answer was: <strong>{{ currentEmoji.shortname.slice(1, -1).replace(/_/g, ' ') }}</strong>
+            The answer was: <strong>{{ currentEmoji.shortname.slice(1, -1).replace(/[_-]/g, ' ') }}</strong>
           </p>
         </div>
         <button @click="nextEmoji"
