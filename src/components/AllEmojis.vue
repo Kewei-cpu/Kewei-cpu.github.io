@@ -116,30 +116,22 @@ const getEmojiCount = (level1: string, level2?: string) => {
       </label>
       <div class="flex flex-wrap gap-2">
         <!-- All button -->
-        <button
-          @click="selectLevel1('all')"
-          :class="[
-            'px-4 py-2 rounded-lg font-medium transition-colors',
-            selectedLevel1 === 'all'
-              ? 'bg-purple-500 text-white'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-          ]"
-        >
+        <button @click="selectLevel1('all')" :class="[
+          'px-4 py-2 rounded-lg font-medium transition-colors',
+          selectedLevel1 === 'all'
+            ? 'bg-teal-500 text-white'
+            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+        ]">
           All ({{ emojis.length }})
         </button>
 
         <!-- Level 1 categories -->
-        <button
-          v-for="level1 in level1Categories"
-          :key="level1"
-          @click="selectLevel1(level1)"
-          :class="[
-            'px-4 py-2 rounded-lg font-medium transition-colors',
-            selectedLevel1 === level1
-              ? 'bg-purple-500 text-white'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-          ]"
-        >
+        <button v-for="level1 in level1Categories" :key="level1" @click="selectLevel1(level1)" :class="[
+          'px-4 py-2 rounded-lg font-medium transition-colors',
+          selectedLevel1 === level1
+            ? 'bg-teal-500 text-white'
+            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+        ]">
           {{ level1 }} ({{ getEmojiCount(level1) }})
         </button>
       </div>
@@ -150,28 +142,21 @@ const getEmojiCount = (level1: string, level2?: string) => {
           Subcategories:
         </div>
         <div class="flex flex-wrap gap-2">
-          <button
-            @click="selectLevel2('all')"
-            :class="[
-              'px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
-              selectedLevel2 === 'all'
-                ? 'bg-purple-400 text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            ]"
-          >
+          <button @click="selectLevel2('all')" :class="[
+            'px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
+            selectedLevel2 === 'all'
+              ? 'bg-teal-400 text-white'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+          ]">
             All ({{ getEmojiCount(selectedLevel1) }})
           </button>
-          <button
-            v-for="level2 in getLevel2Categories(selectedLevel1)"
-            :key="level2"
-            @click="selectLevel2(level2)"
+          <button v-for="level2 in getLevel2Categories(selectedLevel1)" :key="level2" @click="selectLevel2(level2)"
             :class="[
               'px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
               selectedLevel2 === level2
-                ? 'bg-purple-400 text-white'
+                ? 'bg-teal-400 text-white'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            ]"
-          >
+            ]">
             {{ level2 }} ({{ getEmojiCount(selectedLevel1, level2) }})
           </button>
         </div>
@@ -190,34 +175,22 @@ const getEmojiCount = (level1: string, level2?: string) => {
     </div>
 
     <!-- Emojis grid -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 max-h-[600px] overflow-y-auto p-4 bg-gray-50 rounded-lg">
-      <button
-        v-for="emoji in filteredEmojis"
-        :key="emoji.unicode + '-' + emoji.shortname"
-        @click="selectEmoji(emoji)"
-        class="flex flex-col items-center p-4 bg-white rounded-lg hover:bg-purple-50 hover:shadow-md transition-all cursor-pointer group"
-      >
+    <div
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 max-h-[600px] overflow-y-auto p-4 bg-gray-50 rounded-lg">
+      <button v-for="emoji in filteredEmojis" :key="emoji.unicode + '-' + emoji.shortname" @click="selectEmoji(emoji)"
+        class="flex flex-col items-center p-4 bg-white rounded-lg hover:bg-teal-50 hover:shadow-md transition-all cursor-pointer group">
         <div class="text-3xl mb-2">{{ emoji.emoji }}</div>
-        <div class="text-xs text-gray-600 text-center line-clamp-2 group-hover:text-purple-600">
+        <div class="text-xs text-gray-600 text-center line-clamp-2 group-hover:text-teal-600">
           {{ emoji.shortname.slice(1, -1).replace(/_/g, ' ') }}
         </div>
       </button>
     </div>
 
     <!-- Selected emoji details modal -->
-    <div
-      v-if="selectedEmoji"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
-      @click="clearSelection"
-    >
-      <div
-        class="bg-white rounded-lg p-8 max-w-md w-full"
-        @click.stop
-      >
-        <button
-          @click="clearSelection"
-          class="float-right text-gray-500 hover:text-gray-700 text-2xl"
-        >
+    <div v-if="selectedEmoji" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+      @click="clearSelection">
+      <div class="bg-white rounded-lg p-8 max-w-md w-full" @click.stop>
+        <button @click="clearSelection" class="float-right text-gray-500 hover:text-gray-700 text-2xl">
           ×
         </button>
 

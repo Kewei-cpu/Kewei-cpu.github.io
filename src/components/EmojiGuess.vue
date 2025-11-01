@@ -78,7 +78,7 @@ const getLevel2Categories = (level1: string) => {
 const availableLetters = computed(() => {
   const letters = new Set<string>()
   props.emojis.forEach(emoji => {
-    const firstChar = emoji.name.charAt(0).toLowerCase()
+    const firstChar = emoji.shortname.slice(1, -1).charAt(0).toLowerCase()
     if (/[a-z]/.test(firstChar)) {
       letters.add(firstChar)
     }
@@ -95,7 +95,7 @@ const filteredEmojis = computed(() => {
     const length = expectedName.replace(/ /g, '').length
 
     const letterMatch = !selectedLetter.value ||
-      emoji.name.charAt(0).toLowerCase() === selectedLetter.value
+      emoji.shortname.slice(1, -1).charAt(0).toLowerCase() === selectedLetter.value
 
     const lengthMatch = length >= minLength.value && length <= maxLength.value
 
@@ -422,16 +422,16 @@ const resetGame = () => {
           <button @click="selectedLetter = null" :class="[
             'px-3 py-1 rounded-lg font-medium text-sm transition-all',
             selectedLetter === null
-              ? 'bg-purple-500 text-white shadow-lg'
-              : 'bg-gray-200 text-gray-700 hover:bg-purple-200'
+              ? 'bg-teal-500 text-white shadow-lg'
+              : 'bg-gray-200 text-gray-700 hover:bg-teal-200'
           ]">
             Any
           </button>
           <button v-for="letter in availableLetters" :key="letter" @click="selectedLetter = letter" :class="[
             'w-10 h-10 rounded-lg font-bold text-lg transition-all',
             selectedLetter === letter
-              ? 'bg-purple-500 text-white shadow-lg'
-              : 'bg-gray-200 text-gray-700 hover:bg-purple-200 hover:scale-105'
+              ? 'bg-teal-500 text-white shadow-lg'
+              : 'bg-gray-200 text-gray-700 hover:bg-teal-200 hover:scale-105'
           ]">
             {{ letter.toUpperCase() }}
           </button>
@@ -464,7 +464,7 @@ const resetGame = () => {
           <button @click="selectLevel1('all')" :class="[
             'px-3 py-1 rounded-lg font-medium text-sm transition-colors',
             selectedLevel1 === 'all'
-              ? 'bg-purple-500 text-white'
+              ? 'bg-teal-500 text-white'
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           ]">
             All
@@ -474,7 +474,7 @@ const resetGame = () => {
           <button v-for="level1 in level1Categories" :key="level1" @click="selectLevel1(level1)" :class="[
             'px-3 py-1 rounded-lg font-medium text-sm transition-colors',
             selectedLevel1 === level1
-              ? 'bg-purple-500 text-white'
+              ? 'bg-teal-500 text-white'
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           ]">
             {{ level1 }}
@@ -490,7 +490,7 @@ const resetGame = () => {
             <button @click="selectLevel2('all')" :class="[
               'px-2 py-1 rounded text-xs font-medium transition-colors',
               selectedLevel2 === 'all'
-                ? 'bg-purple-400 text-white'
+                ? 'bg-teal-400 text-white'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             ]">
               All
@@ -499,7 +499,7 @@ const resetGame = () => {
               :class="[
                 'px-2 py-1 rounded text-xs font-medium transition-colors',
                 selectedLevel2 === level2
-                  ? 'bg-purple-400 text-white'
+                  ? 'bg-teal-400 text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               ]">
               {{ level2 }}
@@ -526,7 +526,7 @@ const resetGame = () => {
       <!-- Start game button -->
       <div class="text-center">
         <button @click="selectRandomEmoji" :disabled="filteredEmojis.length === 0"
-          class="px-8 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 disabled:bg-gray-400 font-medium transition-colors text-lg">
+          class="px-8 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 disabled:bg-gray-400 font-medium transition-colors text-lg">
           🎯 Start Game
         </button>
       </div>
@@ -551,7 +551,7 @@ const resetGame = () => {
                 row.letterStates[getInputIndexFromBoxIndex(boxIndex)] === 'correct' ? 'bg-green-500 border-green-500 text-white' : '',
                 row.letterStates[getInputIndexFromBoxIndex(boxIndex)] === 'present' ? 'bg-yellow-500 border-yellow-500 text-white' : '',
                 row.letterStates[getInputIndexFromBoxIndex(boxIndex)] === 'absent' ? 'bg-gray-400 border-gray-400 text-white' : '',
-                !row.letterStates[getInputIndexFromBoxIndex(boxIndex)] && !row.isLocked ? 'border-gray-300 focus:border-purple-500' : '',
+                !row.letterStates[getInputIndexFromBoxIndex(boxIndex)] && !row.isLocked ? 'border-gray-300 focus:border-teal-500' : '',
                 row.isLocked ? 'opacity-100' : ''
               ]" />
             <div v-else class="w-12 h-12 flex items-center justify-center text-gray-400 text-xl font-bold">␣</div>
@@ -562,11 +562,11 @@ const resetGame = () => {
       <!-- Control buttons -->
       <div class="text-center flex gap-4 justify-center">
         <button @click="submitGuess" :disabled="showResult"
-          class="px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 disabled:bg-gray-400 font-medium transition-colors">
+          class="px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 disabled:bg-gray-400 font-medium transition-colors">
           Submit Guess
         </button>
         <button @click="giveUp" :disabled="showResult"
-          class="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 disabled:bg-gray-400 font-medium transition-colors">
+          class="px-6 py-3 bg-rose-500/70 text-white rounded-lg hover:bg-rose-600 disabled:bg-gray-400 font-medium transition-colors">
           Give Up
         </button>
       </div>
@@ -592,7 +592,7 @@ const resetGame = () => {
 
       <!-- Back to filters button -->
       <div class="text-center">
-        <button @click="resetGame" class="text-sm text-gray-600 hover:text-purple-600 transition-colors">
+        <button @click="resetGame" class="text-sm text-gray-600 hover:text-teal-600 transition-colors">
           ← Back to Filters
         </button>
       </div>

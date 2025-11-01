@@ -57,10 +57,10 @@ const tabs = [
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500">
+  <div class="min-h-screen bg-gradient-to-br from-emerald-800 to-sky-800">
     <div class="container mx-auto px-4 py-8">
       <h1 class="text-4xl font-bold text-white text-center mb-8">
-        🎯 Emoji Guess
+        🧐 Emoji Guessr 🎯
       </h1>
 
       <div class="bg-white rounded-lg shadow-xl p-6">
@@ -69,7 +69,7 @@ const tabs = [
           <button v-for="tab in tabs" :key="tab.id" @click="activeTab = tab.id" :class="[
             'px-4 py-2 rounded-t-lg font-medium transition-colors',
             activeTab === tab.id
-              ? 'bg-purple-500 text-white'
+              ? 'bg-teal-700 text-white'
               : 'text-gray-600 hover:bg-gray-100'
           ]">
             {{ tab.label }}
@@ -78,7 +78,7 @@ const tabs = [
 
         <!-- Loading State -->
         <div v-if="loading" class="text-center py-8">
-          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto"></div>
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500 mx-auto"></div>
           <p class="mt-4 text-gray-600">Loading emojis...</p>
         </div>
 
