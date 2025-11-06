@@ -287,7 +287,7 @@ const handleInput = (rowIndex: number, boxIndex: number, event: Event) => {
   const target = event.target as HTMLInputElement
   const value = target.value.slice(-1).toLowerCase()
 
-  if (/[a-z]/.test(value)) {
+  if (/[a-z0-9]/.test(value)) {
     row.inputs[inputIndex] = value
     // Auto-advance to next input
     const nextBoxIndex = findNextInputBoxIndex(boxIndex)
@@ -444,13 +444,13 @@ const resetGame = () => {
         <div class="flex items-center gap-4 justify-center">
           <div class="flex items-center gap-2">
             <span class="text-sm text-gray-600">Min:</span>
-            <input v-model.number="minLength" type="number" min="1" max="20"
+            <input v-model.number="minLength" type="number" min="1" max="30"
               class="w-16 px-2 py-1 border border-gray-300 rounded text-center" />
           </div>
           <span class="text-gray-400">-</span>
           <div class="flex items-center gap-2">
             <span class="text-sm text-gray-600">Max:</span>
-            <input v-model.number="maxLength" type="number" :min="minLength" max="20"
+            <input v-model.number="maxLength" type="number" :min="minLength" max="30"
               class="w-16 px-2 py-1 border border-gray-300 rounded text-center" />
           </div>
         </div>
